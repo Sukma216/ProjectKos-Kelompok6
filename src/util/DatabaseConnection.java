@@ -13,8 +13,8 @@ public class DatabaseConnection {
     private static Connection conn;
     
     private static final String jdbc_driver = "com.mysql.cj.jdbc.Driver";
-    private static final String nama_db = "projectkos";
-    private static final String url_db = "jdbc:mysql://localhost/" + nama_db;
+    private static final String nama_db = "projectkost";
+    private static final String url_db = "jdbc:mysql://localhost:3306/" + nama_db;
     private static final String username_db = "root";
     private static final String password_db = "";
 

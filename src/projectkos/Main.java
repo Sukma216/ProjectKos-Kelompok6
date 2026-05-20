@@ -1,20 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package projectkos;
 
-/**
- *
- * @author USER
- */
+import javax.swing.SwingUtilities;
+import view.MainFrame;
+
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // hai ini sukma lagi 
+        // Jalankan GUI di Event Dispatch Thread (EDT) - cara yang benar untuk Swing
+        SwingUtilities.invokeLater(() -> {
+            MainFrame frame = new MainFrame();
+            frame.setVisible(true);
+        });
     }
     
 }

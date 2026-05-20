@@ -19,7 +19,7 @@ public class FasilitasDao implements GenerialDAO<Fasilitas> { // PILAR - inherit
     @Override
     public void insert(Fasilitas f) {
         try (PreparedStatement ps = conn().prepareStatement(
-                "INSERT INTO fasilitas (nama_fasilitas,deskripsi) VALUES (?,?)")) {
+                "INSERT INTO fasilitas (nama_fasilitas) VALUES (?)")) {
             ps.setString(1, f.getNamaFasilitas());
             ps.executeUpdate();
         } catch (SQLException e) { throw new RuntimeException(e); }
@@ -29,9 +29,9 @@ public class FasilitasDao implements GenerialDAO<Fasilitas> { // PILAR - inherit
     @Override
     public void update(Fasilitas f) {
         try (PreparedStatement ps = conn().prepareStatement(
-                "UPDATE fasilitas SET nama_fasilitas=?,deskripsi=? WHERE id_fasilitas=?")) {
+                "UPDATE fasilitas SET nama_fasilitas=? WHERE id_fasilitas=?")) {
             ps.setString(1, f.getNamaFasilitas());
-            ps.setInt   (3, f.getIdFasilitas());
+            ps.setInt   (2, f.getIdFasilitas());
             ps.executeUpdate();
         } catch (SQLException e) { throw new RuntimeException(e); }
     }

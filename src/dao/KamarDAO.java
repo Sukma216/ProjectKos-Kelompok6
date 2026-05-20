@@ -10,7 +10,6 @@ import java.util.List;
 // INHERITANCE + POLYMORPHYISM
 // KamarDAO mengimplementasikan GenerialDAO, tp setiap DAO punya implementasi berbeda sesuai tabel masing masing
 
-
 public class KamarDAO implements GenerialDAO<Kamar> { //inheritance
     // Semua DAO mewarisi kontrak dari GenerialDAO 
     // wajib punya CRUD DASAAR insert, update, delete, read (findById, findAll)
@@ -24,7 +23,7 @@ public class KamarDAO implements GenerialDAO<Kamar> { //inheritance
     // INSERT
     @Override
     public void insert(Kamar k) {
-        String sql = "INSERT INTO kamar (nama_kamar, harga, status) VALUES (?,?,?)";
+        String sql = "INSERT INTO kamar (nama_kamar, harga, status_kamar) VALUES (?,?,?)";
         try (PreparedStatement ps = conn().prepareStatement(sql)) {
             ps.setString(1, k.getNamaKamar());
             ps.setDouble(2, k.getHarga());
@@ -36,7 +35,7 @@ public class KamarDAO implements GenerialDAO<Kamar> { //inheritance
     // UPDATE
     @Override
     public void update(Kamar k) {
-        String sql = "UPDATE kamar SET nama_kamar=?,harga=?,status=? WHERE id_kamar=?";
+        String sql = "UPDATE kamar SET nama_kamar=?,harga=?,status_kamar=? WHERE id_kamar=?";
         try (PreparedStatement ps = conn().prepareStatement(sql)) {
             ps.setString(1, k.getNamaKamar());
             ps.setDouble(2, k.getHarga());
@@ -78,7 +77,7 @@ public class KamarDAO implements GenerialDAO<Kamar> { //inheritance
 
     public List<Kamar> findByStatus(String status) {
         List<Kamar> list = new ArrayList<>();
-        try (PreparedStatement ps = conn().prepareStatement("SELECT * FROM kamar WHERE status=?")) {
+        try (PreparedStatement ps = conn().prepareStatement("SELECT * FROM kamar WHERE status_kamar=?")) {
             ps.setString(1, status);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) list.add(map(rs));
@@ -89,7 +88,7 @@ public class KamarDAO implements GenerialDAO<Kamar> { //inheritance
     private Kamar map(ResultSet rs) throws SQLException {
         return new Kamar(
             rs.getInt("id_kamar"), rs.getString("nama_kamar"),
-            rs.getDouble("harga"), rs.getString("status")
+            rs.getDouble("harga"), rs.getString("status_kamar")
         );
     }
 }
